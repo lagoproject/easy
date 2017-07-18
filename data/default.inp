@@ -1,0 +1,66 @@
+################################################
+#                                              #
+#            LAGO EASY configuration           #
+#                                              #
+#     format: keyword value                    #
+#                                              #
+################################################
+#
+# number of events      (Number of particles injected in station)
+NEvents 100
+# runnumber             (Used for File naming, can be any string)
+RunNumber 01
+# partmode              (VEM| FIXEDTHETA| RANDOM| SCINTILLATOR| HORIZONTAL)
+#                       VEM for vertical and central particles
+#                       FIXEDTHETA for a fixed theta defined below
+#                       RANDOM for sin2theta distribution as expected
+#                       other should not be used
+PartMode VEM
+# partcode              (3 for muons, 2 for electrons, 1 for gammas,0 for all)
+PartCode 3
+# partenergy            (in GeV = 1 Gev for VEM, 0=spectrum)
+PartEnergy 1
+# parttheta             (in degrees relevant only in FIXEDTHETA mode)
+PartTheta 0
+#
+#######################
+#
+#   TYPICAL USES
+#
+#######################
+#
+# VEM (muons, 1 GeV)
+####################
+#PartMode VEM
+#PartCode 3
+#PartEnergy 1
+#############
+#
+# Inclined muons at 60 deg, 1 GeV
+#################################
+#PartMode FIXEDTHETA
+#PartCode 3
+#PartEnergy 1
+#PartTheta 60
+#############
+#
+# Background
+############
+#PartMode RANDOM
+#PartCode 0
+#PartEnergy 0
+#############
+#
+#
+# Some other values can be modified but should probably not be modified
+# for most users...
+# 
+# simmode 		(FAST | DETAILED | SAMPLE) 
+#			recommended: DETAILED
+#SimMode DETAILED
+# muemmode      	(DEFAULT | MUEM) (if MUEM, mu and em traces) 
+#			recommended: DEFAULT
+#MuEmMode DEFAULT	
+# elecmode      	(DEFAULT | FULL | PM | SHOWSAT)(if FULL intermediate elecsim written)   
+#			recommended: PM
+#ElecMode PM
