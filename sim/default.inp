@@ -7,7 +7,7 @@
 ################################################
 #
 # number of events      (Number of particles injected in station)
-NEvents 10000
+NEvents 100000
 # runnumber             (Used for File naming, can be any string)
 RunNumber 01
 # partmode              (VEM| FIXEDTHETA| RANDOM| SCINTILLATOR| HORIZONTAL)
@@ -57,10 +57,10 @@ PartTheta 0
 # 
 # simmode 		(FAST | DETAILED | SAMPLE) 
 #			recommended: DETAILED
-#SimMode DETAILED
+SimMode DETAILED
 # muemmode      	(DEFAULT | MUEM) (if MUEM, mu and em traces) 
 #			recommended: DEFAULT
-#MuEmMode DEFAULT	
+MuEmMode DEFAULT	
 # elecmode      	(DEFAULT | FULL | PM | SHOWSAT)(if FULL intermediate elecsim written)   
 #			recommended: PM
-#ElecMode PM
+ElecMode PM

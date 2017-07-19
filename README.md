@@ -80,6 +80,26 @@ make run
 
 in the parent directory. It will provide a <kbd>.root</kbd> file with a specific name depending on the parameters defined in the <kbd>default.inp</kbd> file. It is then converted into ASCII, extracting the FADC traces, producing a <kbd>.dat</kbd> ASCII file.
 
+#### Data analysis
+
+The output data is quite simple. In the resulting ASCII file, the expected ADC values for the first 100 temporal bins of the FADC traces (~2.5 us) are given for each injected particle. A simple awk script to produce a charge histogram could be: 
+```bash
+for i in *.dat; do 
+	u=$(basename $i .dat)
+	echo $i
+	awk '{t[$1]+=$4}END{for (i in t) {print t[i] }}'  $i | sort -n | uniq -c | awk '{if ($2) {print $2,$1}}' > $u.hst
+```
+producing a file containing a two column file: <kbd>charge counts</kbd>.
+
+#### Housekeeping
+
+We include three leves of data and binary cleaning: 
+```bash
+make clean		# clean binaries and libraries
+make simclean   # erase simulated data from previous runs
+make fullclean  # executes clean and simclean directives 
+```
+
 ### Additional package
 
 An additional tool, <kbd>Trace</kbd> is included. It can be used to calculate the trace lenght distribution of muons going thought the detector. To configure it, two blocks inside the main code should be modified. So: 

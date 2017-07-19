@@ -35,17 +35,17 @@ all: $(TESTS)
 
 .PHONY: clean
 
+run:
+	$(MAKE) -C $(SIM_DIR)
+
 clean:
 	rm -f bin/*
 	$(MAKE) -C $(CODE_DIR) clean
 
-run:
-	$(MAKE) -C $(SIM_DIR)
-
-fullclean:
-	rm -f bin/*
-	$(MAKE) -C $(CODE_DIR) clean
+simclean:
 	$(MAKE) -C $(SIM_DIR) clean
+
+fullclean: clean simclean
 
 check-lago:
 ifndef LAGO_EASY
