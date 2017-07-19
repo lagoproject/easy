@@ -84,10 +84,12 @@ in the parent directory. It will provide a <kbd>.root</kbd> file with a specific
 
 The output data is quite simple. In the resulting ASCII file, the expected ADC values for the first 100 temporal bins of the FADC traces (~2.5 us) are given for each injected particle. A simple awk script to produce a charge histogram could be: 
 ```bash
+cd ${LAGO_EASY}/sim
 for i in *.dat; do 
 	u=$(basename $i .dat)
 	echo $i
 	awk '{t[$1]+=$4}END{for (i in t) {print t[i] }}'  $i | sort -n | uniq -c | awk '{if ($2) {print $2,$1}}' > $u.hst
+done
 ```
 producing a file containing a two column file: <kbd>charge counts</kbd>.
 
