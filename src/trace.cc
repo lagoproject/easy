@@ -38,7 +38,6 @@
 using namespace std;
 
 // config
-
 const double deg2rad  = M_PI / 180.;
 const double rad2deg  = 180. / M_PI;
 const bool   internal = true; // use internal generator  or read muons from external file
@@ -75,11 +74,11 @@ const double tankH = 1200. / units;
 */
 
 // guane-3
-const double tankR = 515 / units;
-const double tankH = 500. / units;
-#define MU "guane.muo" 
-#define TR "guane.trc"
-#define DI "guane.dst"
+const double tankR = 515 / units; // detector radius
+const double tankH = 500. / units; // detector height
+#define MU "guane.muo" // muon crossing the detector distribution file
+#define TR "guane.trc" // traces distribution file
+#define DI "guane.dst" // all muons speed distribution file
 
 // antartico
 /*

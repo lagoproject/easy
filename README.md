@@ -22,11 +22,11 @@
 
 The [Latin American Giant Observatory (LAGO)](http://lagoproject.org) is an extended Astroparticle Observatory at global scale. It is mainly oriented to basic research on three branches of Astroparticle physics: the Extreme Universe, Space Weather phenomena, and Atmospheric Radiation at ground level.
 
-# INSTALL
+## INSTALL
 
 Please follow this simple instructions.
 
-## Requirements
+### Requirements
 
 You just need a working [ROOT](http://root.cern.ch/) installation (ROOT v 5.34.36 or higher is the recommended version). Then you just execute <kbd>make</kbd> at the main directory:
 
@@ -38,9 +38,9 @@ It will create the <kbd>${LAGO_EASY}</kbd> environment variable and modify the <
 
 Please report any installation problems please [email us](mailto:lago@lagoproject.org).
 
-## Usage
+### Usage
 
-### Modifying geometry
+#### Modifying geometry
 
 The detector geometry is defined in the <kbd>src/Constants.h</kbd> file. A symbolink link named <kbd>configs.h</kbd> is provided. To modify just edit this file:
 
@@ -69,7 +69,7 @@ If you change detector geometry, you will need to recompile the whole package. J
  make
 ```
 
-## Running
+#### Running
 
 The simulation execution is governed by the <kbd>default.inp</kbd> file. Just edit if following the examples given in that file. It is straightforward. Please be sure to be in CALIB mode (SHOWER mode is deactivated in LAGO code). Then, for run the simulation just use
 
@@ -79,3 +79,35 @@ make run
 ```
 
 in the parent directory. It will provide a <kbd>.root</kbd> file with a specific name depending on the parameters defined in the <kbd>default.inp</kbd> file. It is then converted into ASCII, extracting the FADC traces, producing a <kbd>.dat</kbd> ASCII file.
+
+### Additional package
+
+An additional tool, <kbd>Trace</kbd> is included. It can be used to calculate the trace lenght distribution of muons going thought the detector. To configure it, two blocks inside the main code should be modified. So: 
+```bash
+vim src/trace.cc
+```
+and then, modify these two blocks according to your needs:
+```cpp
+// config
+const double deg2rad  = M_PI / 180.;
+const double rad2deg  = 180. / M_PI;
+const bool   internal = true; // use internal generator (true) or read muons from external file
+const bool   extSeeds = true;  // use rand() to generate the seeds or just set them as -1
+const double muons    =  1e6;  // number of showers to generate if internal is enabled
+const double units    =  10.;  // in milimeters
+```
+and
+```cpp
+// guane-3
+const double tankR = 515 / units; // detector radius
+const double tankH = 500. / units; // detector height
+#define MU "guane.muo" // muon crossing the detector distribution file
+#define TR "guane.trc" // traces distribution file
+#define DI "guane.dst" // all muons speed distribution file
+```
+Then, just compile and run Trace:
+```bash
+cd $LAGO_EASY
+make
+./bin/Trace
+```
