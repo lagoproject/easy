@@ -45,7 +45,7 @@ Please report any installation problems please [email us](mailto:lago@lagoprojec
 The detector geometry is defined in the <kbd>src/Constants.h</kbd> file. A symbolink link named <kbd>configs.h</kbd> is provided. To modify just edit this file:
 
 ```bash
-vim configs.h</kbd>
+vim configs.h
 ```
 
 and modify it by changing the values of STATION_RADIUS, STATION_HEIGHT and the number and position of PMTs (NPM X_PM and Y_PM). For example, for one of our detectors deployed at the LAGO Bariloche site, the configuring block is:
