@@ -28,11 +28,7 @@ Please follow this simple instructions.
 
 ## Requirements
 
-You just need a working [ROOT](http://root.cern.ch/) installation (ROOT v 5.34.36 or higher is the recommended version). Then you just 
- make 
-from this directory. It will create the
- LAGO_EASY
-environment variable and modify the *.bashrc* file. Please source it again before to continue. 
+You just need a working [ROOT](http://root.cern.ch/) installation (ROOT v 5.34.36 or higher is the recommended version). Then you just execute <kbd>make</kbd> at the main directory. It will create the <kbd>${LAGO_EASY}</kbd> environment variable and modify the <kbd>$HOME/.bashrc</kbd> file. Please source it again before to continue.
 
 Please report any installation problems please [email us](mailto:lago@lagoproject.org).
 
@@ -40,32 +36,33 @@ Please report any installation problems please [email us](mailto:lago@lagoprojec
 
 ### Modifying geometry
 
-The detector geometry is defined in the *Constants.h* file, located at the *src* directory. To modify it:
- cd $LAGO_EASY
- vim src/Constants.h
+The detector geometry is defined in the <kbd>src/Constants.h</kbd> file. A symbolink link named <kbd>configs.h</kbd> is provided. To modify just edit this file:
+
+ <kbd>vim configs.h</kbd>
 
 and modify it by changing the values of STATION_RADIUS, STATION_HEIGHT and the number and position of PMTs (NPM X_PM and Y_PM). For example, for one of our detectors deployed at the LAGO Bariloche site, the configuring block is:
 ``` cpp
+//DETECTOR CONSTANTS
 const double STATION_RADIUS     = 0.70; //(m)
 const double STATION_HEIGHT     = 1.46; //(m)
 const int  NPM                  = 1;
 const double X_PM[NPM]          = {0.}; // (0,0) is the center of the tank roof
 const double Y_PM[NPM]          = {0.}; // (0,0) is the center of the tank roof
+const double RAD_PM             = .1477;//(m)
+const double HC_PM              = .0776;//(m)
+const double TOP_FACT           = 1.;  //white top
 ```
 
-Then recompile it
- cd $LAGO_EASY/src
+If you change detector geometry, you will need to recompile the whole package. Just execute <kbd>make</kbd> at the parent directory:
+```bash
+ cd ${LAGO_EASY}/src
  make
+```
 
 ## Running
 
-Go to the data directory,
+The simulation execution is governed by the <kbd>default.inp</kbd> file. Just edit if following the examples given in that file. It is straightforward. Please be sure to be in CALIB mode (SHOWER mode is deactivated in LAGO code). Then, for run the simulation just use
 
- cd $LAGO_EASY/data
+ <kbd>make run</kbd>
 
-and edit the *default.inp* file. It is straightforward. Be sure to be in CALIB mode (SHOWER mode is deactivated in LAGO code). Then, just run it from the data directory using *make*:
-
- make
-
-It will provide a **root** file with a specific name depending on the parameters defined in the *default.inp* file. It is then converted in ASCII, extracting the FADC traces, producing a *.dat* ASCII file.
-~                                                                          
+in the parent directory. It will provide a <kbd>.root</kbd> file with a specific name depending on the parameters defined in the <kbd>default.inp</kbd> file. It is then converted into ASCII, extracting the FADC traces, producing a <kbd>.dat</kbd> ASCII file.

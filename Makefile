@@ -24,16 +24,28 @@
 #   try to preserve encoding  
 CC = g++
 
+CODE_DIR = src
+SIM_DIR = sim
 TESTS = check-lago
-TARGETS = 
 CFLAGS = -Wall
 
-all: $(TESTS) $(TARGETS)
+all: $(TESTS)
+	$(MAKE) -C $(CODE_DIR)
+	$(MAKE) -C $(CODE_DIR) install
 
 .PHONY: clean
 
 clean:
-	rm -f $(TARGETS)
+	rm -f bin/*
+	$(MAKE) -C $(CODE_DIR) clean
+
+run:
+	$(MAKE) -C $(SIM_DIR)
+
+fullclean:
+	rm -f bin/*
+	$(MAKE) -C $(CODE_DIR) clean
+	$(MAKE) -C $(SIM_DIR) clean
 
 check-lago:
 ifndef LAGO_EASY

@@ -7,7 +7,7 @@
 ################################################
 #
 # number of events      (Number of particles injected in station)
-NEvents 100
+NEvents 10000
 # runnumber             (Used for File naming, can be any string)
 RunNumber 01
 # partmode              (VEM| FIXEDTHETA| RANDOM| SCINTILLATOR| HORIZONTAL)
@@ -15,11 +15,11 @@ RunNumber 01
 #                       FIXEDTHETA for a fixed theta defined below
 #                       RANDOM for sin2theta distribution as expected
 #                       other should not be used
-PartMode VEM
+PartMode RANDOM
 # partcode              (3 for muons, 2 for electrons, 1 for gammas,0 for all)
-PartCode 3
+PartCode 0
 # partenergy            (in GeV = 1 Gev for VEM, 0=spectrum)
-PartEnergy 1
+PartEnergy 0
 # parttheta             (in degrees relevant only in FIXEDTHETA mode)
 PartTheta 0
 #

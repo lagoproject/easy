@@ -1,29 +1,36 @@
-CPPFLAGS= -DCALIBONLY -Wno-deprecated -I`root-config --cflags`
+CC=g++
+CPPFLAGS= -DCALIBONLY -Wno-deprecated -I`root-config --cflags` -Wall
 LINKFLAGS= `root-config --libs`
 
 SRC=Event.o Station.o Array.o Particle.o EventDict.o ShowerParam.o Utils.o BuildProcessesTables.o FastSimulation.o ManageEvent.o EasySimConfig.o Analyze.o AnaDict.o
 
-all: EasySim Ascii Trace
+TARGETS=EasySim Ascii Trace
+
+all: $(TESTS) $(TARGETS)
 
 EventDict.cc: Event.h Station.h Array.h Particle.h EasySimLinkDef.h
 	rootcint -f EventDict.cc -c Event.h Station.h Array.h Particle.h EasySimLinkDef.h
+
 AnaDict.cc: Analyze.h
 	rootcint -f AnaDict.cc -c Analyze.h
 
 .o:
-	g++ -c $<
+	$(CC) -c $<
 
 EasySim: ${SRC} EasySim.o
-	g++ -o $@ ${SRC} EasySim.o ${LINKFLAGS}
+	$(CC) -o $@ ${SRC} EasySim.o ${LINKFLAGS}
 
 Ascii: ${SRC} Ascii.o
-	g++ -o $@ ${SRC} Ascii.o ${LINKFLAGS}
+	$(CC) -o $@ ${SRC} Ascii.o ${LINKFLAGS}
 
 Trace: 
-	g++ -o $@ trace.cc
+	$(CC) -o $@ trace.cc
 
 clean:
-	rm -f *.o *Dict* EasySim Ascii Trace
+	rm -f $(TARGETS) *.o *Dict*
+
+install:
+	cp $(TARGETS) ../bin/
 
 # dependencies added by makedep (and slightly alterated for ROOT dictionnaries)
 # DO NOT DELETE
