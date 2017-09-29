@@ -4,7 +4,7 @@ LINKFLAGS= `root-config --libs`
 
 SRC=Event.o Station.o Array.o Particle.o EventDict.o ShowerParam.o Utils.o BuildProcessesTables.o FastSimulation.o ManageEvent.o EasySimConfig.o Analyze.o AnaDict.o
 
-TARGETS=EasySim Ascii Trace
+TARGETS=EasySim Ascii Trace TraceCubic
 
 all: $(TESTS) $(TARGETS)
 
@@ -25,6 +25,9 @@ Ascii: ${SRC} Ascii.o
 
 Trace: 
 	$(CC) -o $@ trace.cc
+
+TraceCubic: 
+	$(CC) -o $@ trace-cubic.cc
 
 clean:
 	rm -f $(TARGETS) *.o *Dict*

@@ -104,7 +104,7 @@ make fullclean  # executes clean and simclean directives
 
 ### Additional package
 
-An additional tool, <kbd>Trace</kbd> is included. It can be used to calculate the trace lenght distribution of muons going thought the detector. To configure it, two blocks inside the main code should be modified. So: 
+Two additional tools, <kbd>Trace</kbd> and <kbd>TraceCubic</kbd> are included. It can be used to calculate the trace lenght distribution of muons going thought a cylindrical or rectangular (even cubic) detector. To configure it, two blocks inside the main code should be modified. So: 
 ```bash
 vim src/trace.cc
 ```
@@ -133,3 +133,4 @@ cd $LAGO_EASY
 make
 ./bin/Trace
 ```
+and the same for TraceCubic.
