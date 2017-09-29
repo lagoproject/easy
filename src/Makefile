@@ -33,6 +33,7 @@ clean:
 	rm -f $(TARGETS) *.o *Dict*
 
 install:
+	mkdir -p ../bin/
 	cp $(TARGETS) ../bin/
 
 # dependencies added by makedep (and slightly alterated for ROOT dictionnaries)

@@ -39,7 +39,7 @@ run:
 	$(MAKE) -C $(SIM_DIR)
 
 clean:
-	rm -f bin/*
+	rm -rf bin
 	$(MAKE) -C $(CODE_DIR) clean
 
 simclean:
